@@ -15,9 +15,9 @@ public class FloorCeilBinarySearchImpl implements FloorCeil {
 
 	@Override
 	public Integer floor(Integer[] array, Integer x) {
-		Integer possible = null;
-		possible = binaryFloor(array, x, 0, (array.length) - 1, possible);
-		return possible;
+		Integer floor = null;
+		floor = binaryFloor(array, x, 0, (array.length) - 1, floor);
+		return floor;
 	}
 
 	public static Integer binaryFloor(Integer[] array, Integer x, int leftIndex, int rightIndex, Integer possible) {
@@ -56,16 +56,5 @@ public class FloorCeilBinarySearchImpl implements FloorCeil {
 			}
 		}
 		return possible;
-	}
-
-	public static Integer ceil2(Integer[] array, Integer x) {
-		Integer ceil = null;
-		ceil = ceilRecursive(array, x, 0, (array.length) - 1, ceil);
-		return ceil;
-	}
-
-	public static void main(String[] args) {
-		Integer[] array = {1, 2, 3, 4, 5, 7, 8};
-		System.out.println(ceil2(array, 5));
 	}
 }
