@@ -20,13 +20,6 @@ public class FloorCeilBinarySearchImpl implements FloorCeil {
 		return possible;
 	}
 
-
-	public static Integer floor2(Integer[] array, Integer x) {
-		Integer possible = null;
-		possible = binaryFloor(array, x, 0, (array.length) - 1, possible);
-		return possible;
-	}
-
 	public static Integer binaryFloor(Integer[] array, Integer x, int leftIndex, int rightIndex, Integer possible) {
 		if (leftIndex <= rightIndex) {
 			int meio = (leftIndex + rightIndex) / 2;
@@ -45,12 +38,34 @@ public class FloorCeilBinarySearchImpl implements FloorCeil {
 
 	@Override
 	public Integer ceil(Integer[] array, Integer x) {
-		// TODO implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		Integer ceil = null;
+		ceil = ceilRecursive(array, x, 0, (array.length) - 1, ceil);
+		return ceil;
+	}
+
+	public static Integer ceilRecursive(Integer[] array, Integer x, int leftIndex, int rightIndex, Integer possible) {
+		if (leftIndex <= rightIndex) {
+			int meio = (leftIndex + rightIndex) / 2;
+			if (array[meio] == x) {
+				possible = array[meio];
+				rightIndex = leftIndex - 1;
+			} else if (array[meio] < x) {
+				possible = ceilRecursive(array, x, meio + 1, rightIndex, possible);
+			} else {
+				possible = ceilRecursive(array, x, leftIndex, meio -1, array[meio]);
+			}
+		}
+		return possible;
+	}
+
+	public static Integer ceil2(Integer[] array, Integer x) {
+		Integer ceil = null;
+		ceil = ceilRecursive(array, x, 0, (array.length) - 1, ceil);
+		return ceil;
 	}
 
 	public static void main(String[] args) {
 		Integer[] array = {1, 2, 3, 4, 5, 7, 8};
-		System.out.println(floor2(array, 7));
+		System.out.println(ceil2(array, 5));
 	}
 }
