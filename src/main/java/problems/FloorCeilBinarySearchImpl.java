@@ -20,8 +20,8 @@ public class FloorCeilBinarySearchImpl implements FloorCeil {
 		return floor;
 	}
 
-	public static Integer binaryFloor(Integer[] array, Integer x, int leftIndex, int rightIndex, Integer possible) {
-		if (leftIndex <= rightIndex) {
+	public Integer binaryFloor(Integer[] array, Integer x, int leftIndex, int rightIndex, Integer possible) {
+		if ((array != null) && (array.length > 0) && (leftIndex <= rightIndex)) {
 			int meio = (leftIndex + rightIndex) / 2;
 			if (array[meio] == x) {
 				possible = array[meio];
@@ -43,8 +43,8 @@ public class FloorCeilBinarySearchImpl implements FloorCeil {
 		return ceil;
 	}
 
-	public static Integer ceilRecursive(Integer[] array, Integer x, int leftIndex, int rightIndex, Integer possible) {
-		if (leftIndex <= rightIndex) {
+	public Integer ceilRecursive(Integer[] array, Integer x, int leftIndex, int rightIndex, Integer possible) {
+		if ((array != null) && (array.length > 0) && (leftIndex <= rightIndex)) {
 			int meio = (leftIndex + rightIndex) / 2;
 			if (array[meio] == x) {
 				possible = array[meio];
