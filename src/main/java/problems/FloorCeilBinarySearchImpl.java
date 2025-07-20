@@ -15,37 +15,33 @@ public class FloorCeilBinarySearchImpl implements FloorCeil {
 
 	@Override
 	public Integer floor(Integer[] array, Integer x) {
-		
+		Integer possible = null;
+		possible = binaryFloor(array, x, 0, (array.length) - 1, possible);
+		return possible;
 	}
 
-	public Integer binaryFloor(Integer[] array, Integer x, int leftIndex, int rightIndex) {
-		int meio = ((rightIndex - leftIndex) / 2) + leftIndex;
-		int dif = x;
-		if (array[meio] == x) {
-			dif = x - array[meio];
-			return x;
-		} else if (array[meio] < x) {
-			binaryFloor(array, x, meio+1, rightIndex);
-		} else {
-			binaryFloor(array, x, leftIndex, meio - 1);
-		}
-		return null;
+
+	public static Integer floor2(Integer[] array, Integer x) {
+		Integer possible = null;
+		possible = binaryFloor(array, x, 0, (array.length) - 1, possible);
+		return possible;
 	}
 
-	public Integer binaryFloor(Integer[] array, Integer x, int leftIndex, int rightIndex, int diferença) {
-		if ((array != null) && (array.length > 0) && (leftIndex < rightIndex)) {
-			int meio = ((rightIndex - leftIndex) / 2) + leftIndex;
-			while (diferença >= 0) {
-				if (diferença == 0) {
-					return x;
-				} else if (((x - array[meio]) < diferença) && diferença >= 0) {
-					diferença = x - array[meio];
-				}
+	public static Integer binaryFloor(Integer[] array, Integer x, int leftIndex, int rightIndex, Integer possible) {
+		if (leftIndex <= rightIndex) {
+			int meio = (leftIndex + rightIndex) / 2;
+			if (array[meio] == x) {
+				possible = array[meio];
+				rightIndex = leftIndex-1;
+			} else if (array[meio] < x) {
+				possible = binaryFloor(array, x, meio + 1, rightIndex, array[meio]);
+			} else {
+				possible = binaryFloor(array, x, leftIndex, meio -1, possible);
 			}
-			
 		}
-		return null;
+		return possible;
 	}
+
 
 	@Override
 	public Integer ceil(Integer[] array, Integer x) {
@@ -53,41 +49,8 @@ public class FloorCeilBinarySearchImpl implements FloorCeil {
 		throw new UnsupportedOperationException("Not implemented yet!");
 	}
 
-
-
-	
-	public Integer menorIgual(Integer[] array, Integer x) {
-		
-		return null;
+	public static void main(String[] args) {
+		Integer[] array = {1, 2, 3, 4, 5, 7, 8};
+		System.out.println(floor2(array, 7));
 	}
-
-	public Integer menorIgualLogic(Integer[] array, Integer x, int leftIndex, int rightIndex, int dif) {
-		int floor = array[leftIndex];
-		dif = x;
-		if ((array != null) && (array.length > 0) && (leftIndex < rightIndex)) {
-			int meio = ((((rightIndex - leftIndex) / 2) + leftIndex));
-			if (array[meio] == x) {
-				return x;
-			} else if (array[meio] < x && (((x - array[meio]) < dif) && (x - array[meio]) > 0)) {
-				dif = x - array[meio];
-				menorIgualLogic(array, x, leftIndex, meio - 1, dif);
-			} else {
-				menorIgualLogic(array, x, meio + 1, rightIndex, dif);
-			}
-			
-		} else if((array != null) && (array.length > 0) && (leftIndex >= rightIndex)) {
-			
-			floor = x - dif;
-
-			if (floor <= x)
-				return floor;
-
-		}
-		
-		
-		return null;
-	}
-
-
-
 }
